@@ -1,8 +1,6 @@
-const Events = require("../models/event");
-
-
+const Eventt = require("../models/event");
 const addEvent = async (req, res) => {
-    const event = new Events(req.body);
+    const event = new Eventt(req.body);
     try{
     const event1= await event.save()
         res.status(201).json({

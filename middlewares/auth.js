@@ -77,4 +77,19 @@ module.exports.validateSignupData = (req, res, next) => {
   next();
 };
 
+module.exports.validateEvent = (req, res, next) => {
+  const valideEvent = Joi.object({
+    title: Joi.string().required(),
+    debutDate: Joi.date().iso().required(),
+    finDate: Joi.date().iso().min(Joi.ref("debutDate")).required(),
+  });
+
+  const { error } = valideEvent.validate(req.body);
+
+  if (error) {
+    return res.status(400).json({ error: error.details[0].message });
+  }
+
+  next();
+}
 
